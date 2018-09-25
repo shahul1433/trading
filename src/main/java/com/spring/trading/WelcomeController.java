@@ -10,4 +10,9 @@ public class WelcomeController {
 	public String getHome() {
 		return "home";
 	}
+	
+	@GetMapping("/login")
+	public String getLoginPage() {
+		return "login/login";
+	}
 }

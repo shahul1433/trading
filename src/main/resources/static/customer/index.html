@@ -1,0 +1,81 @@
+<h1 id="customer-header">
+	Customer
+	<span>
+		<button type="button" class="btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#add-customer-modal">
+			<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
+		</button>
+	</span>
+</h1>
+
+<!-- Modal start here -->
+<div class="modal fade" id="add-customer-modal" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content -->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title text-center" style="font-weight: bold;">Add Customer</h4>
+			</div>
+			
+			<div class="modal-body">
+				<div style="padding: 10px;">
+					<form class="form-horizontal" action="#">
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="shopName">Shop Name</label>
+							<div class="col-sm-9">
+								<input type="text" id="shopName" class="form-control" placeholder="Enter Shop Name" required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="customerName">Customer Name</label>
+							<div class="col-sm-9">
+								<input type="text" id="customerName" class="form-control" placeholder="Enter Customer Name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="place">Place</label>
+							<div class="col-sm-9">
+								<input type="text" id="place" class="form-control" placeholder="Enter Place">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="post">Post</label>
+							<div class="col-sm-9">
+								<input type="text" id="post" class="form-control" placeholder="Enter Post">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="district">District</label>
+							<div class="col-sm-9">
+								<input type="text" id="district" class="form-control" placeholder="Enter District">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="state">State</label>
+							<div class="col-sm-9">
+								<input type="text" id="state" class="form-control" placeholder="Enter State">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3" for="gstin">GSTIN</label>
+							<div class="col-sm-9">
+								<input type="text" id="gstin" class="form-control" placeholder="Enter GSTIN Number">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Modal end here -->
+
+<div class="customer-table"></div>

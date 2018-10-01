@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>P K Rubber Trading</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="common/style.css">
-  
-  <script type="text/javascript">
-  	$(function(){
-  		$("#header").load("/common/header.html");
-  		$("#footer").load("/common/footer.html");
-  	});
-  </script>
-  
-</head>
-<body>
+	<head>
+	  <title>P K Rubber Trading</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	  <link rel="stylesheet" href="common/style.css">
+	  
+	</head>
 	
-	<div id="header"></div>
-	
-	<div id ="body" class="container">
+	<body ng-app="homeApp">
 		
-	</div>
-	
-	<div id="footer"></div>
-	
-	<script type="text/javascript" src="common/script.js"></script>
-</body>
+		<!-- Header -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">P K Rubber Trading</a>
+				</div>
+				<ul id="main-nav" class="nav navbar-nav">
+					<li><a id="home" href="#!home">Home</a></li>
+					<li><a id="customer" href="#!customer">Customer</a></li>
+					<li><a href="#">Stock</a></li>
+					<li><a href="#">Ledger</a></li>
+					<li><a href="#">Credits</a></li>
+					<li><a href="#">Account</a></li>
+					<li><a id="about" href="#">About</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div ng-view class="container-fluid"></div>
+		
+		<!-- Footer -->
+		<div id="footer" class="footer navbar-fixed-bottom text-center">
+			&copy 2018, all rights are reserved
+		</div>
+		
+		<script type="text/javascript" src="common/script.js"></script>
+		<script type="text/javascript" src="common/angular.js"></script>
+	</body>
 </html>

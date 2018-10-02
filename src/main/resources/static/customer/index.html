@@ -1,7 +1,12 @@
+<link rel="stylesheet" href="customer/style.css">
+
 <div ng-controller="customerCtrl">
 	<h1 id="customer-header">
 		Customer
 		<span>
+			<button type="button" class="btn btn-default pull-right btn-sm" style="margin-left: 15px;" ng-click="refresh()">
+				<i class="glyphicon glyphicon-refresh"></i>
+			</button>
 			<button type="button" class="btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#add-customer-modal">
 				<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
 			</button>
@@ -13,7 +18,7 @@
 		<div class="modal-dialog">
 			
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="modal-content" ng-controller="addCustomerCtrl">
 			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -22,53 +27,86 @@
 				
 				<div class="modal-body">
 					<div style="padding: 20px;">
-						<form class="form-horizontal" action="#">
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="customerId">Customer ID</label>
-								<div class="col-sm-9">
-									<input type="text" id="customerId" class="form-control" placeholder="Enter Customer Id" required="required">
-								</div>
-							</div>
+						<form class="form-horizontal" action="#" name="addCustomerForm" novalidate>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="shopName">Shop Name</label>
 								<div class="col-sm-9">
-									<input type="text" id="shopName" class="form-control" placeholder="Enter Shop Name" required="required">
+									<input type="text" id="shopName" ng-model="shopName" name="shopName" class="form-control" placeholder="Enter Shop Name" required="required">
+									<span class="form-error" ng-show="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid">
+										<span ng-show="addCustomerForm.shopName.$error.required">Shop Name is required.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="customerName">Customer Name</label>
 								<div class="col-sm-9">
-									<input type="text" id="customerName" class="form-control" placeholder="Enter Customer Name">
+									<input type="text" id="customerName" ng-model="customerName" name="customerName" class="form-control" placeholder="Enter Customer Name" required="required">
+									<span class="form-error" ng-show="addCustomerForm.customerName.$dirty && addCustomerForm.customerName.$invalid">
+										<span ng-show="addCustomerForm.customerName.$error.required">Customer Name is required.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="mobile">Mobile No</label>
+								<div class="col-sm-9">
+									<input type="text" id="mobile" ng-model="mobile" name="mobile" class="form-control" placeholder="Enter Mobile Number" required="required">
+									<span class="form-error" ng-show="addCustomerForm.mobile.$dirty && addCustomerForm.mobile.$invalid">
+										<span ng-show="addCustomerForm.mobile.$error.required">Mobile Number is required.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="email">Email</label>
+								<div class="col-sm-9">
+									<input type="email" id="email" ng-model="email" name="email" class="form-control" placeholder="Enter Email">
+									<span class="form-error" ng-show="addCustomerForm.email.$dirty && addCustomerForm.email.$invalid">
+										<span ng-show="addCustomerForm.email.$error.email">Invalid Email Address.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="place">Place</label>
 								<div class="col-sm-9">
-									<input type="text" id="place" class="form-control" placeholder="Enter Place">
+									<input type="text" id="place" ng-model="place" name="place" class="form-control" placeholder="Enter Place" required="required">
+									<span class="form-error" ng-show="addCustomerForm.place.$dirty && addCustomerForm.place.$invalid">
+										<span ng-show="addCustomerForm.place.$error.required">Place is required.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="post">Post</label>
 								<div class="col-sm-9">
-									<input type="text" id="post" class="form-control" placeholder="Enter Post">
+									<input type="text" id="post" ng-model="post" name="post" class="form-control" placeholder="Enter Post" required="required">
+									<span class="form-error" ng-show="addCustomerForm.post.$dirty && addCustomerForm.post.$invalid">
+										<span ng-show="addCustomerForm.post.$error.required">Post is required.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="district">District</label>
 								<div class="col-sm-9">
-									<input type="text" id="district" class="form-control" placeholder="Enter District">
+									<input type="text" id="district" ng-model="district" name="district" class="form-control" placeholder="Enter District" required="required">
+									<span class="form-error" ng-show="addCustomerForm.district.$dirty && addCustomerForm.district.$invalid">
+										<span ng-show="addCustomerForm.district.$error.required">District is required.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="state">State</label>
 								<div class="col-sm-9">
-									<input type="text" id="state" class="form-control" placeholder="Enter State">
+									<input type="text" id="state" ng-model="state" name="state" class="form-control" placeholder="Enter State" required="required">
+									<span class="form-error" ng-show="addCustomerForm.state.$dirty && addCustomerForm.state.$invalid">
+										<span ng-show="addCustomerForm.state.$error.required">State is required.</span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="gstin">GSTIN</label>
 								<div class="col-sm-9">
-									<input type="text" id="gstin" class="form-control" placeholder="Enter GSTIN Number">
+									<input type="text" id="gstin" ng-model="gstin" name="gstin" class="form-control" placeholder="Enter GSTIN Number" required="required">
+									<span class="form-error" ng-show="addCustomerForm.gstin.$dirty && addCustomerForm.gstin.$invalid">
+										<span ng-show="addCustomerForm.gstin.$error.required">GSTIN is required.</span>
+									</span>
 								</div>
 							</div>
 						</form>
@@ -76,8 +114,19 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Add</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" ng-click="addCustomer()" 
+					ng-disabled="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid ||
+								 addCustomerForm.customerName.$dirty && addCustomerForm.customerName.$invalid ||
+								 addCustomerForm.mobile.$dirty && addCustomerForm.mobile.$invalid ||
+								 addCustomerForm.email.$error.email ||
+								 addCustomerForm.place.$dirty && addCustomerForm.place.$invalid ||
+								 addCustomerForm.post.$dirty && addCustomerForm.post.$invalid ||
+								 addCustomerForm.district.$dirty && addCustomerForm.district.$invalid ||
+								 addCustomerForm.state.$dirty && addCustomerForm.state.$invalid ||
+								 addCustomerForm.gstin.$dirty && addCustomerForm.gstin.$invalid
+								">
+					Add</button>
+					<button type="button" class="btn btn-warning" ng-click="clear()">Clear</button>
 				</div>
 				
 			</div>

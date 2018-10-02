@@ -1,30 +1,45 @@
 package com.spring.trading.customer;
 
-public class Customer implements Comparable<Customer> {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.validator.constraints.UniqueElements;
+
+@Entity
+public class TCustomer{
+	@Id
+	@GeneratedValue
 	private Integer id;
+	
 	private String shopName;
 	private String customerName;
+	private String mobile;
+	private String email;
 	private String place;
 	private String post;
 	private String district;
 	private String state;
-	private String GSTIN;
+	private String gstin;
+	private Boolean archive;
 	
-	public Customer(Integer id, String shopName, String customerName, String place, String post, String district,
-			String state, String gSTIN) {
+	public TCustomer() {
 		super();
-		this.id = id;
+	}
+
+	public TCustomer(String shopName, String customerName, String mobile, String email, String place, String post,
+			String district, String state, String gstin, Boolean archive) {
+		super();
 		this.shopName = shopName;
 		this.customerName = customerName;
+		this.mobile = mobile;
+		this.email = email;
 		this.place = place;
 		this.post = post;
 		this.district = district;
 		this.state = state;
-		GSTIN = gSTIN;
-	}
-	
-	public Customer() {
-		// TODO Auto-generated constructor stub
+		this.gstin = gstin;
+		this.archive = archive;
 	}
 
 	public Integer getId() {
@@ -49,6 +64,22 @@ public class Customer implements Comparable<Customer> {
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPlace() {
@@ -83,22 +114,20 @@ public class Customer implements Comparable<Customer> {
 		this.state = state;
 	}
 
-	public String getGSTIN() {
-		return GSTIN;
+	public String getGstin() {
+		return gstin;
 	}
 
-	public void setGSTIN(String gSTIN) {
-		GSTIN = gSTIN;
+	public void setGstin(String gstin) {
+		this.gstin = gstin;
 	}
 
-	@Override
-	public int compareTo(Customer o) {
-		if(id > o.id)
-			return 1;
-		else if(id < o.id)
-			return -1;
-		else
-			return 0;
+	public Boolean getArchive() {
+		return archive;
 	}
-	
+
+	public void setArchive(Boolean archive) {
+		this.archive = archive;
+	}
+		
 }

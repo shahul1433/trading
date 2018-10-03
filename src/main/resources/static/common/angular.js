@@ -28,6 +28,7 @@ function getUsers($scope, $http){
 }
 
 homeApp.controller('addCustomerCtrl', function($scope){
+	$scope.flag = false;
 	$scope.clear = function(){
 		$scope.shopName = '';
 		$scope.addCustomerForm.shopName.$setPristine();
@@ -49,8 +50,57 @@ homeApp.controller('addCustomerCtrl', function($scope){
 		$scope.addCustomerForm.gstin.$setPristine();
 		
 	};
-	
+	/*$scope.validate = function() {
+		if($scope.shopName == undefined || $scope.shopName == '')
+			$scope.addCustomerForm.shopName.$setDirty();
+		if($scope.customerName == undefined || $scope.customerName == '')
+			$scope.addCustomerForm.customerName.$setDirty();
+		if($scope.mobile == undefined || $scope.mobile == '')
+			$scope.addCustomerForm.mobile.$setDirty();
+		if($scope.place == undefined || $scope.place == '')
+			$scope.addCustomerForm.place.$setDirty();
+		if($scope.post == undefined || $scope.post == '')
+			$scope.addCustomerForm.post.$setDirty();
+		if($scope.district == undefined || $scope.district == '')
+			$scope.addCustomerForm.district.$setDirty();
+		if($scope.state == undefined || $scope.state == '')
+			$scope.addCustomerForm.state.$setDirty();
+		if($scope.gstin == undefined || $scope.gstin == '')
+			$scope.addCustomerForm.gstin.$setDirty();
+		
+	};*/
 	$scope.addCustomer = function() {
-		console.log('clicked');
+		var status = validateCustomer($scope);
+		console.log(status);
 	};
 });
+
+function validateCustomer($scope) {
+	var flag = true;
+	if($scope.shopName == undefined || $scope.shopName == ''){
+		$scope.addCustomerForm.shopName.$setDirty();
+		flag = false;
+	}if($scope.customerName == undefined || $scope.customerName == ''){
+		$scope.addCustomerForm.customerName.$setDirty();
+		flag = false;
+	}if($scope.mobile == undefined || $scope.mobile == ''){
+		$scope.addCustomerForm.mobile.$setDirty();
+		flag = false;
+	}if($scope.place == undefined || $scope.place == ''){
+		$scope.addCustomerForm.place.$setDirty();
+		flag = false;
+	}if($scope.post == undefined || $scope.post == ''){
+		$scope.addCustomerForm.post.$setDirty();
+		flag = false;
+	}if($scope.district == undefined || $scope.district == ''){
+		$scope.addCustomerForm.district.$setDirty();
+		flag = false;
+	}if($scope.state == undefined || $scope.state == ''){
+		$scope.addCustomerForm.state.$setDirty();
+		flag = false;
+	}if($scope.gstin == undefined || $scope.gstin == ''){
+		$scope.addCustomerForm.gstin.$setDirty();
+		flag = false;
+	}
+	return flag;
+}

@@ -13,7 +13,10 @@ homeApp.config(function($routeProvider){
 	});
 });
 
-homeApp.controller('customerCtrl', function($scope, $http){
+homeApp.controller('customerCtrl', function($scope, $http, $rootScope){
+	$rootScope.$on("refreshCustomer", function(){
+		$scope.refresh();
+	});
 	getUsers($scope, $http);
 	$scope.refresh = function() {
 		getUsers($scope, $http);
@@ -27,7 +30,7 @@ function getUsers($scope, $http){
     });
 }
 
-homeApp.controller('addCustomerCtrl', function($scope){
+homeApp.controller('addCustomerCtrl', function($scope, $http, $rootScope){
 	$scope.flag = false;
 	$scope.clear = function(){
 		$scope.shopName = '';
@@ -50,30 +53,40 @@ homeApp.controller('addCustomerCtrl', function($scope){
 		$scope.addCustomerForm.gstin.$setPristine();
 		
 	};
-	/*$scope.validate = function() {
-		if($scope.shopName == undefined || $scope.shopName == '')
-			$scope.addCustomerForm.shopName.$setDirty();
-		if($scope.customerName == undefined || $scope.customerName == '')
-			$scope.addCustomerForm.customerName.$setDirty();
-		if($scope.mobile == undefined || $scope.mobile == '')
-			$scope.addCustomerForm.mobile.$setDirty();
-		if($scope.place == undefined || $scope.place == '')
-			$scope.addCustomerForm.place.$setDirty();
-		if($scope.post == undefined || $scope.post == '')
-			$scope.addCustomerForm.post.$setDirty();
-		if($scope.district == undefined || $scope.district == '')
-			$scope.addCustomerForm.district.$setDirty();
-		if($scope.state == undefined || $scope.state == '')
-			$scope.addCustomerForm.state.$setDirty();
-		if($scope.gstin == undefined || $scope.gstin == '')
-			$scope.addCustomerForm.gstin.$setDirty();
-		
-	};*/
 	$scope.addCustomer = function() {
 		var status = validateCustomer($scope);
+		if(status === true){
+			var json = new Object();
+			json["shopName"] = $scope.shopName;
+			json["customerName"] = $scope.customerName;
+			json["mobile"] = $scope.mobile;
+			json["email"] = $scope.email;
+			json["place"] = $scope.place;
+			json["post"] = $scope.post;
+			json["district"] = $scope.district;
+			json["state"] = $scope.state;
+			json["gstin"] = $scope.gstin.toUpperCase();
+			json["archive"] = false;
+			$http({
+				url : 'http://localhost:8080/add-customer',
+				method : "POST",
+				data : json,
+				headers : {'Content-Type': 'application/json'}
+			}).then(function(response){
+				//Success
+				$rootScope.$emit("refreshCustomer", {});
+				$scope.clear();
+			},
+			function(response){
+				//failed
+				console.log("Something went wrong");
+			});
+			
+		}
 		console.log(status);
 	};
 });
+
 
 function validateCustomer($scope) {
 	var flag = true;

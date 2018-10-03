@@ -19,7 +19,8 @@ public class CustomerService {
 		return customers;
 	}
 	
-	public void addCustomer(TCustomer customer) {
+	public boolean addCustomer(TCustomer customer) {
 		repository.save(customer);
+		return true;
 	}
 }

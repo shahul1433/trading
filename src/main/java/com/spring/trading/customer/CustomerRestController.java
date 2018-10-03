@@ -22,7 +22,7 @@ public class CustomerRestController {
 	}
 	
 	@RequestMapping(value="/add-customer", method=RequestMethod.POST)
-	public void addCustomer(@RequestBody TCustomer customer) {
-		service.addCustomer(customer);
+	public boolean addCustomer(@RequestBody TCustomer customer) {
+		return service.addCustomer(customer);
 	}
 }

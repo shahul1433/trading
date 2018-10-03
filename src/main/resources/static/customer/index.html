@@ -7,7 +7,7 @@
 			<button type="button" class="btn btn-default pull-right btn-sm" style="margin-left: 15px;" ng-click="refresh()">
 				<i class="glyphicon glyphicon-refresh"></i>
 			</button>
-			<button type="button" class="btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#add-customer-modal">
+			<button type="button" class="btn btn-primary pull-right btn-sm" data-toggle="modal" data-target="#add-customer-modal">
 				<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
 			</button>
 		</span>
@@ -138,7 +138,7 @@
 	<div class="customer-table">
 		<table class='table table-hover'>
 			<thead>
-				<th>ID</th><th>Shop Name</th><th>Customer</th><th>Place</th><th>Post</th><th>District</th><th>State</th><th>GSTIN</th>
+				<th>ID</th><th>Shop Name</th><th>Customer</th><th>Place</th><th>Post</th><th>District</th><th>State</th><th>GSTIN</th><th></th>
 			</thead>
 			
 			<tbody>
@@ -151,6 +151,10 @@
 					<td>{{x.district}}</td>
 					<td>{{x.state}}</td>
 					<td>{{x.gstin}}</td>
+					<td>
+						<button class="btn btn-success btn-sm" style="margin-right: 5px;">Edit</button>
+						<button class="btn btn-danger btn-sm">Delete</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>

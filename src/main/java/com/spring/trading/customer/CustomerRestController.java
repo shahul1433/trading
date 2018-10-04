@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,11 @@ public class CustomerRestController {
 	@RequestMapping(value="/add-customer", method=RequestMethod.POST)
 	public boolean addCustomer(@RequestBody TCustomer customer) {
 		return service.addCustomer(customer);
+	}
+	
+	@RequestMapping(value="/delete-customer/{id}", method=RequestMethod.DELETE)
+	public void deleteCustomer(@PathVariable String id) {
+		Integer idInt = Integer.parseInt(id);
+		service.deleteCustomer(idInt);
 	}
 }

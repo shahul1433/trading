@@ -13,6 +13,29 @@ homeApp.config(function($routeProvider){
 	});
 });
 
+homeApp.directive("nextFocus", function(){
+	var directive = {
+	        restrict: 'A',
+	        link: function (scope, elem, attrs) {
+	            elem.bind('keydown', function (e) {
+	                var code = e.keyCode || e.which;
+	                if (code === 13) {
+	                    try {
+	                        if (attrs.tabindex != undefined) {
+	                            var currentTabIndex = attrs.tabindex;
+	                            var nextTabIndex = parseInt(attrs.tabindex) + 1;
+	                            $("[tabindex=" + nextTabIndex + "]").focus();
+	                        }
+	                    } catch (e) {
+	                    	console.log(e);
+	                    }
+	                }
+	            });
+	        }
+	    };
+    return directive;
+});
+
 homeApp.controller('customerCtrl', function($scope, $http, $rootScope){
 	$rootScope.$on("refreshCustomer", function(){
 		$scope.refresh();
@@ -20,6 +43,20 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope){
 	getUsers($scope, $http);
 	$scope.refresh = function() {
 		getUsers($scope, $http);
+	};
+	$scope.deleteCustomer = function(data){
+		console.log(data.x);
+		$http({
+			url : 'http://localhost:8080/delete-customer/'+data.x.id,
+			method : "DELETE"
+		}).then(function(response){
+			//Success
+			$rootScope.$emit("refreshCustomer", {});
+		},
+		function(response){
+			//failed
+			console.log("Something went wrong while deleting customer");
+		});
 	};
 });
 
@@ -63,8 +100,8 @@ homeApp.controller('addCustomerCtrl', function($scope, $http, $rootScope){
 			json["email"] = $scope.email;
 			json["place"] = $scope.place;
 			json["post"] = $scope.post;
-			json["district"] = $scope.district;
-			json["state"] = $scope.state;
+			json["district"] = $scope.district.toUpperCase();
+			json["state"] = $scope.state.toUpperCase();
 			json["gstin"] = $scope.gstin.toUpperCase();
 			json["archive"] = false;
 			$http({
@@ -117,3 +154,4 @@ function validateCustomer($scope) {
 	}
 	return flag;
 }
+

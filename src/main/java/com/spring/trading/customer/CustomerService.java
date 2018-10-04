@@ -10,17 +10,21 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
 	@Autowired
-	private CustomerRepository repository;
+	private CustomerRepository customerRepository;
 	
 	public List<TCustomer> getAllCustomer(){
 		List<TCustomer> customers = new ArrayList<>();
-		repository.findAll()
+		customerRepository.findAll()
 		.forEach(customers::add);
 		return customers;
 	}
 	
 	public boolean addCustomer(TCustomer customer) {
-		repository.save(customer);
+		customerRepository.save(customer);
 		return true;
+	}
+	
+	public void deleteCustomer(Integer id) {
+		customerRepository.deleteById(id);
 	}
 }

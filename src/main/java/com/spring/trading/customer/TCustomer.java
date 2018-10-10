@@ -1,5 +1,6 @@
 package com.spring.trading.customer;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ public class TCustomer{
 	private String post;
 	private String district;
 	private String state;
+	@Column(unique=true)
 	private String gstin;
 	private Boolean archive;
 	

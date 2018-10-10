@@ -114,7 +114,7 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" next-focus tabindex="9" class="btn btn-primary" ng-click="addCustomer()"
+					<button type="button" class="btn btn-primary" ng-click="addCustomer()"
 					ng-disabled="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid ||
 								 addCustomerForm.customerName.$dirty && addCustomerForm.customerName.$invalid ||
 								 addCustomerForm.mobile.$dirty && addCustomerForm.mobile.$invalid ||
@@ -135,10 +135,10 @@
 	</div>
 	<!-- Modal end here -->
 	
-	<div class="customer-table">
+	<div id="customer-table">
 		<table class='table table-hover'>
 			<thead>
-				<th>ID</th><th>Shop Name</th><th>Customer</th><th>Place</th><th>Post</th><th>District</th><th>State</th><th>GSTIN</th><th></th>
+				<th>#</th><th>SHOP NAME</th><th>CUSTOMER</th><th>PLACE</th><th>POST</th><th>DISTRICT</th><th>STATE</th><th>GSTIN</th><th></th>
 			</thead>
 			
 			<tbody>
@@ -153,7 +153,7 @@
 					<td>{{x.gstin}}</td>
 					<td>
 						<button class="btn btn-success btn-sm" style="margin-right: 5px;">Edit</button>
-						<button class="btn btn-danger btn-sm" ng-click="deleteCustomer(this)">Delete</button>
+						<button class="btn btn-danger btn-sm" ng-click="askToDelete(this)">Delete</button>
 					</td>
 				</tr>
 			</tbody>

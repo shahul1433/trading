@@ -19,12 +19,12 @@ public class CustomerService {
 		return customers;
 	}
 	
-	public boolean addCustomer(TCustomer customer) {
+	public boolean addCustomer(TCustomer customer) throws Exception{
 		customerRepository.save(customer);
 		return true;
 	}
 	
-	public void deleteCustomer(Integer id) {
+	public void deleteCustomer(Integer id) throws Exception{
 		customerRepository.deleteById(id);
 	}
 }

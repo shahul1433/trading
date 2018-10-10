@@ -3,6 +3,7 @@ package com.spring.trading.customer;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +23,30 @@ public class CustomerRestController {
 		return service.getAllCustomer();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/add-customer", method=RequestMethod.POST)
-	public boolean addCustomer(@RequestBody TCustomer customer) {
-		return service.addCustomer(customer);
+	public JSONObject addCustomer(@RequestBody TCustomer customer) {
+		JSONObject response = new JSONObject();
+		try {
+			service.addCustomer(customer);
+			response.put("status", true);
+			response.put("response", "Success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Error => "+e.getMessage()+" , Cause : "+e.getCause());
+			response.put("status", false);
+			response.put("response", "Error : "+e.getMessage()+" , Cause : "+e.getCause());
+		}
+		return response;
 	}
 	
 	@RequestMapping(value="/delete-customer/{id}", method=RequestMethod.DELETE)
 	public void deleteCustomer(@PathVariable String id) {
-		Integer idInt = Integer.parseInt(id);
-		service.deleteCustomer(idInt);
+		try {
+			Integer idInt = Integer.parseInt(id);
+			service.deleteCustomer(idInt);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

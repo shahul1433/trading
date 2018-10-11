@@ -98,15 +98,18 @@ function deleteCustomer(data, $http, $rootScope){
 		method : "DELETE"
 	}).then(function(response){
 		//Success
+		toastr.success('Customer deleted <strong>Successfully</strong>');
 		$rootScope.$emit("refreshCustomer", {});
 	},
 	function(response){
 		//failed
-		console.log("Something went wrong while deleting customer");
+		toastr.error('Something went wrong while deleting customer.', 'Error');
+		console.log("Something went wrong while deleting customer.");
 	});
 }
 
 function askToDelete(data, $modal, $http, $rootScope){
+	
 	var message = "Are you sure to Delete ?";
 	
 	var modalHtml = '<div class="modal-header" id="popup-header">'
@@ -149,4 +152,30 @@ var ModalInstanceCtrl = function($scope, $modalInstance){
 	$scope.cancel = function(){
 		$modalInstance.dismiss('cancel');
 	}
+}
+
+function addCustomer($scope, $rootScope, $http, $modal){
+	var modalInstance = $modal.open({
+		templateUrl : "customer/template/add_customer_popup.html",
+		controller : addCustomerPopupCtrl
+	});
+}
+
+var addCustomerPopupCtrl = function($scope, $modalInstance, $rootScope){
+	$scope.addCustomer = function() {
+		$rootScope.$emit("addCustomer",{});
+	};
+	
+	$scope.clear = function(){
+		clearAddCustomerForm($scope);
+		$modalInstance.dismiss('cancel');
+	};
+	
+	$scope.closeAddCustomerPopup = function(){
+		$modalInstance.dismiss('cancel');
+	}
+	
+	$rootScope.$on("closeAddCustomerPopup", function(){
+		$modalInstance.dismiss('cancel');
+	});
 }

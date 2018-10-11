@@ -4,12 +4,15 @@
 	  <title>P K Rubber Trading</title>
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-	  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	  <link rel="stylesheet" href="common/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="common/toastr.min.css">
+	  <script src="common/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="common/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="common/angularjs/1.6.9/angular.min.js"></script>
+	  <script src="common/angularjs/1.6.9/angular-route.js"></script>
+	  <script src="common/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	  <script src="common/toastr.min.js"></script>
+	  <script src="common/flash/dist/angular-flash.min.js"></script>
 	  <link rel="stylesheet" href="common/style.css">
 	  
 	</head>
@@ -17,7 +20,7 @@
 	<body ng-app="homeApp">
 		
 		<!-- Header -->
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">P K Rubber Trading</a>
@@ -41,7 +44,7 @@
 		<script type="text/javascript" src="common/script.js"></script>
 		<script type="text/javascript" src="common/angular.js"></script>
 		
-		<div ng-view class="container-fluid"></div>
+		<div ng-view class="container-fluid" style="margin-top: 50px;"></div>
 		
 		<!-- Footer -->
 		<div id="footer" class="footer navbar-fixed-bottom text-center">

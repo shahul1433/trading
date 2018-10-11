@@ -7,157 +7,51 @@
 			<button type="button" class="btn btn-default pull-right btn-sm" style="margin-left: 15px;" ng-click="refresh()">
 				<i class="glyphicon glyphicon-refresh"></i>
 			</button>
-			<button type="button" class="btn btn-primary pull-right btn-sm" data-toggle="modal" data-target="#add-customer-modal">
+			<button type="button" class="btn btn-primary pull-right btn-sm" ng-click="addCustomer()">
 				<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
 			</button>
 		</span>
 	</h1>
+	<!-- To show flash messages -->
+	<flash-message duration="100" ></flash-message>
 	
-	<!-- Modal start here -->
-	<div class="modal fade" id="add-customer-modal" role="dialog">
-		<div class="modal-dialog">
-			
-			<!-- Modal content -->
-			<div class="modal-content" ng-controller="addCustomerCtrl">
-			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title text-center" style="font-weight: bold;">Add Customer</h4>
-				</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		<div class="row">
+			<table class='table table-fixed'>
+				<thead>
+					<tr>
+						<th class="col-xs-1">#</th>
+						<th class="col-xs-2">SHOP NAME</th>
+						<th class="col-xs-1">CUSTOMER</th>
+						<th class="col-xs-2">PLACE</th>
+						<th class="col-xs-1">POST</th>
+						<th class="col-xs-1">DISTRICT</th>
+						<th class="col-xs-1">STATE</th>
+						<th class="col-xs-2">GSTIN</th>
+						<th ></th>
+					</tr>
+				</thead>
 				
-				<div class="modal-body">
-					<div style="padding: 20px;">
-						<form class="form-horizontal" action="#" name="addCustomerForm" novalidate>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="shopName">Shop Name</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="0" id="shopName" ng-model="shopName" name="shopName" class="form-control" placeholder="Enter Shop Name" required="required">
-									<span class="form-error" ng-show="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid">
-										<span ng-show="addCustomerForm.shopName.$error.required">Shop Name is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="customerName">Customer Name</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="1" id="customerName" ng-model="customerName" name="customerName" class="form-control" placeholder="Enter Customer Name" required="required">
-									<span class="form-error" ng-show="addCustomerForm.customerName.$dirty && addCustomerForm.customerName.$invalid">
-										<span ng-show="addCustomerForm.customerName.$error.required">Customer Name is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="mobile">Mobile No</label>
-								<div class="col-sm-9">
-									<input type="tel" next-focus tabindex="2" id="mobile" ng-model="mobile" name="mobile" class="form-control" placeholder="Enter Mobile Number" required="required" maxlength="10">
-									<span class="form-error" ng-show="addCustomerForm.mobile.$dirty && addCustomerForm.mobile.$invalid">
-										<span ng-show="addCustomerForm.mobile.$error.required">Mobile Number is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="email">Email</label>
-								<div class="col-sm-9">
-									<input type="email" next-focus tabindex="3" id="email" ng-model="email" name="email" class="form-control" placeholder="Enter Email">
-									<span class="form-error" ng-show="addCustomerForm.email.$dirty && addCustomerForm.email.$invalid">
-										<span ng-show="addCustomerForm.email.$error.email">Invalid Email Address.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="place">Place</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="4" id="place" ng-model="place" name="place" class="form-control" placeholder="Enter Place" required="required">
-									<span class="form-error" ng-show="addCustomerForm.place.$dirty && addCustomerForm.place.$invalid">
-										<span ng-show="addCustomerForm.place.$error.required">Place is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="post">Post</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="5" id="post" ng-model="post" name="post" class="form-control" placeholder="Enter Post" required="required">
-									<span class="form-error" ng-show="addCustomerForm.post.$dirty && addCustomerForm.post.$invalid">
-										<span ng-show="addCustomerForm.post.$error.required">Post is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="district">District</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="6" id="district" ng-model="district" name="district" class="form-control" placeholder="Enter District" required="required">
-									<span class="form-error" ng-show="addCustomerForm.district.$dirty && addCustomerForm.district.$invalid">
-										<span ng-show="addCustomerForm.district.$error.required">District is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="state">State</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="7" id="state" ng-model="state" name="state" class="form-control" placeholder="Enter State" required="required">
-									<span class="form-error" ng-show="addCustomerForm.state.$dirty && addCustomerForm.state.$invalid">
-										<span ng-show="addCustomerForm.state.$error.required">State is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="gstin">GSTIN</label>
-								<div class="col-sm-9">
-									<input type="text" next-focus tabindex="8" id="gstin" ng-model="gstin" name="gstin" class="form-control" placeholder="Enter GSTIN Number" required="required">
-									<span class="form-error" ng-show="addCustomerForm.gstin.$dirty && addCustomerForm.gstin.$invalid">
-										<span ng-show="addCustomerForm.gstin.$error.required">GSTIN is required.</span>
-									</span>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" ng-click="addCustomer()"
-					ng-disabled="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid ||
-								 addCustomerForm.customerName.$dirty && addCustomerForm.customerName.$invalid ||
-								 addCustomerForm.mobile.$dirty && addCustomerForm.mobile.$invalid ||
-								 addCustomerForm.email.$error.email ||
-								 addCustomerForm.place.$dirty && addCustomerForm.place.$invalid ||
-								 addCustomerForm.post.$dirty && addCustomerForm.post.$invalid ||
-								 addCustomerForm.district.$dirty && addCustomerForm.district.$invalid ||
-								 addCustomerForm.state.$dirty && addCustomerForm.state.$invalid ||
-								 addCustomerForm.gstin.$dirty && addCustomerForm.gstin.$invalid ||
-								 {{flag}}
-								">
-					Add</button>
-					<button type="button" class="btn btn-warning" ng-click="clear()">Clear</button>
-				</div>
-				
-			</div>
+				<tbody>
+					<tr ng-repeat="x in customers">
+						<td class="col-xs-1">{{$index + 1}}</td>
+						<td class="col-xs-2">{{x.shopName}}</td>
+						<td class="col-xs-1">{{x.customerName}}</td>
+						<td class="col-xs-2">{{x.place}}</td>
+						<td class="col-xs-1">{{x.post}}</td>
+						<td class="col-xs-1">{{x.district}}</td>
+						<td class="col-xs-1">{{x.state}}</td>
+						<td class="col-xs-2">{{x.gstin}}</td>
+						<td>
+							<button class="btn btn-success btn-sm" style="margin-right: 2px;">Edit</button>
+							<button class="btn btn-danger btn-sm" ng-click="askToDelete(this)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-	</div>
-	<!-- Modal end here -->
-	
-	<div id="customer-table">
-		<table class='table table-hover'>
-			<thead>
-				<th>#</th><th>SHOP NAME</th><th>CUSTOMER</th><th>PLACE</th><th>POST</th><th>DISTRICT</th><th>STATE</th><th>GSTIN</th><th></th>
-			</thead>
-			
-			<tbody>
-				<tr ng-repeat="x in customers">
-					<td>{{$index + 1}}</td>
-					<td>{{x.shopName}}</td>
-					<td>{{x.customerName}}</td>
-					<td>{{x.place}}</td>
-					<td>{{x.post}}</td>
-					<td>{{x.district}}</td>
-					<td>{{x.state}}</td>
-					<td>{{x.gstin}}</td>
-					<td>
-						<button class="btn btn-success btn-sm" style="margin-right: 5px;">Edit</button>
-						<button class="btn btn-danger btn-sm" ng-click="askToDelete(this)">Delete</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		</div>
 	</div>
 	
 	<script type="text/javascript" src="customer/script.js"></script>

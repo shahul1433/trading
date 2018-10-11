@@ -20,7 +20,7 @@
 	<body ng-app="homeApp">
 		
 		<!-- Header -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="clockCtrl">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">P K Rubber Trading</a>
@@ -33,6 +33,16 @@
 					<li><a href="#">Credits</a></li>
 					<li><a href="#">Account</a></li>
 					<li><a id="about" href="#">About</a></li>
+					<li>
+						<a href="">
+							<i>
+								<span style="color: lightblue;">{{clock | date:'dd MMM yyyy,'}}</span>
+								<span style="color: lightblue;">{{day}}</span>
+								<span class="glyphicon glyphicon-time" style="color: white;"></span>
+								<span style="color: white;">{{clock | date:'hh:mm:ss a'}}</span>
+							</i>
+						</a>
+					</li>
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">

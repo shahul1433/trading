@@ -16,23 +16,21 @@
 	<flash-message duration="100" ></flash-message>
 	
 	<div class="panel panel-default">
-		<div class="panel-body">
-		<div class="row">
+		<!-- <div class="panel-body"> -->
+				<div class="panel-heading" style="font-weight: bolder;">
+					<div class="row">
+						<div class="col-xs-1">#</div>
+						<div class="col-xs-2">SHOP NAME</div>
+						<div class="col-xs-1">CUSTOMER</div>
+						<div class="col-xs-2">PLACE</div>
+						<div class="col-xs-1">POST</div>
+						<div class="col-xs-1">DISTRICT</div>
+						<div class="col-xs-1">STATE</div>
+						<div class="col-xs-2">GSTIN</div>
+					</div>
+				</div>
+		
 			<table class='table table-fixed'>
-				<thead>
-					<tr>
-						<th class="col-xs-1">#</th>
-						<th class="col-xs-2">SHOP NAME</th>
-						<th class="col-xs-1">CUSTOMER</th>
-						<th class="col-xs-2">PLACE</th>
-						<th class="col-xs-1">POST</th>
-						<th class="col-xs-1">DISTRICT</th>
-						<th class="col-xs-1">STATE</th>
-						<th class="col-xs-2">GSTIN</th>
-						<th ></th>
-					</tr>
-				</thead>
-				
 				<tbody>
 					<tr ng-repeat="x in customers">
 						<td class="col-xs-1">{{$index + 1}}</td>
@@ -50,8 +48,8 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		</div>
+		
+		<!-- </div> -->
 	</div>
 	
 	<script type="text/javascript" src="customer/script.js"></script>

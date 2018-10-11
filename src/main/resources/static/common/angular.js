@@ -41,6 +41,28 @@ homeApp.directive("nextFocus", function(){
     return directive;
 });
 
+homeApp.controller('clockCtrl', function($scope, $interval){
+	var day = function(){
+		var d = new Date();
+		var weekday=new Array(7);
+		weekday[0]="Sunday";
+		weekday[1]="Monday";
+		weekday[2]="Tuesday";
+		weekday[3]="Wednesday";
+		weekday[4]="Thursday";
+		weekday[5]="Friday";
+		weekday[6]="Saturday";
+		$scope.day = weekday[d.getDay()];
+	}
+	day();
+	var tick = function(){
+		$scope.clock = Date.now();
+	}
+	tick();
+	$interval(tick, 1000);
+	
+});
+
 homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, Flash){
 	$rootScope.$on("refreshCustomer", function(){
 		$scope.refresh();
@@ -73,6 +95,7 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 		var message = "Hello";
 		var id = Flash.create('success', message, 5000, {class: 'custom-class', id: 'custom-id'}, true);
 	};
+	
 });
 
 homeApp.controller('addCustomerCtrl', function($scope, $http, $rootScope){

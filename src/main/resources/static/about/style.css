@@ -1,0 +1,19 @@
+.panel{
+	width: 30%;
+    margin: 0 auto;
+    margin-top: 100px;
+    box-shadow: 2px 5px 10px black;
+}
+
+.panel-heading{
+	font-family: inherit;
+	font-weight: bold;
+}
+
+
+table {
+	width: 100%;
+}
+td{
+	padding-right: 30px;
+}

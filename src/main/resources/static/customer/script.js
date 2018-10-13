@@ -73,16 +73,21 @@ function addCustomerToDB($scope, $rootScope, $http){
 	}).then(function(response){
 		//Success
 		if(response.data.status == true){
+			toastr.success('Customer added <strong>Successfully</strong>');
 			$rootScope.$emit("refreshCustomer", {});
-			$scope.clear();
 		}else{
+			toastr.options.preventDuplicates = true;
+			toastr.error(response.data.response, 'Error');
 			console.log(response.data.response);
 		}
 	},
 	function(response){
 		//failed
+		toastr.options.preventDuplicates = true;
+		toastr.error("Something went wrong", 'Error');
 		console.log("Something went wrong");
 	});
+	$scope.clear();
 }
 
 function getUsers($scope, $http){

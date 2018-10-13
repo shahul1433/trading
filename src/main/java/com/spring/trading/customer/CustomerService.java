@@ -27,4 +27,12 @@ public class CustomerService {
 	public void deleteCustomer(Integer id) throws Exception{
 		customerRepository.deleteById(id);
 	}
+	
+	public boolean isCustomerAlreadyExist(TCustomer customer) {
+		TCustomer c = customerRepository.findByGstin(customer.getGstin());
+		if(c == null)
+			return false;
+		else
+			return true;
+	}
 }

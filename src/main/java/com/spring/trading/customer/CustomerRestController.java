@@ -27,15 +27,22 @@ public class CustomerRestController {
 	@RequestMapping(value="/add-customer", method=RequestMethod.POST)
 	public JSONObject addCustomer(@RequestBody TCustomer customer) {
 		JSONObject response = new JSONObject();
-		try {
-			service.addCustomer(customer);
-			response.put("status", true);
-			response.put("response", "Success");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("Error => "+e.getMessage()+" , Cause : "+e.getCause());
+		//Check the customer already exist or not
+		boolean isExist = service.isCustomerAlreadyExist(customer);
+		if(isExist == false) { // Not Exist
+			try {
+				service.addCustomer(customer);
+				response.put("status", true);
+				response.put("response", "Success");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("Error => "+e.getMessage()+" , Cause : "+e.getCause());
+				response.put("status", false);
+				response.put("response", "Error : "+e.getMessage()+" , Cause : "+e.getCause());
+			}
+		}else { //Already Exist
 			response.put("status", false);
-			response.put("response", "Error : "+e.getMessage()+" , Cause : "+e.getCause());
+			response.put("response", "Customer with GSTIN \""+customer.getGstin()+"\" already exist.");
 		}
 		return response;
 	}

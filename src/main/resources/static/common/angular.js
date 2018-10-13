@@ -14,6 +14,9 @@ homeApp.config(function($routeProvider){
 	})
 	.when("/customer", {
 		templateUrl : "customer/index.html"
+	})
+	.when("/about", {
+		templateUrl : "about/index.html"
 	});
 });
 //========== Navigation to different pages start ======================
@@ -54,9 +57,9 @@ homeApp.controller('clockCtrl', function($scope, $interval){
 		weekday[6]="Saturday";
 		$scope.day = weekday[d.getDay()];
 	}
-	day();
 	var tick = function(){
 		$scope.clock = Date.now();
+		day();
 	}
 	tick();
 	$interval(tick, 1000);
@@ -106,10 +109,9 @@ homeApp.controller('addCustomerCtrl', function($scope, $http, $rootScope){
 	
 	$rootScope.$on("addCustomer", function(){
 		var status = validateCustomer($scope);
-		if(status === true){
+		if(status == true){
 			addCustomerToDB($scope, $rootScope, $http);
 			$rootScope.$emit("closeAddCustomerPopup", {});
-			toastr.success('Customer added <strong>Successfully</strong>');
 		}
 	});
 });

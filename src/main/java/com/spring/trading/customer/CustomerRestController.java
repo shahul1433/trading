@@ -18,9 +18,16 @@ public class CustomerRestController {
 	@Autowired
 	private CustomerService service;
 	
-	@RequestMapping("/get-all-customer")
-	public List<TCustomer> getAllCustomer(){
-		return service.getAllCustomer();
+	@RequestMapping("/get-all-customer/{page}/{rows}")
+	public List<TCustomer> getAllCustomer(@PathVariable String page,@PathVariable String rows){
+		Integer pg = Integer.parseInt(page);
+		Integer row = Integer.parseInt(rows);
+		return service.getAllCustomer(pg, row);
+	}
+	
+	@RequestMapping("/get-no-of-customer")
+	public Long getNoOfRecords() {
+		return service.getNoOfRecords();
 	}
 	
 	@SuppressWarnings("unchecked")

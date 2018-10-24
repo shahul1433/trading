@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,11 +14,16 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
-	public List<TCustomer> getAllCustomer(){
+	public List<TCustomer> getAllCustomer(Integer page, Integer rows){
 		List<TCustomer> customers = new ArrayList<>();
-		customerRepository.findAll()
+		Pageable pageable = new PageRequest(page, rows);
+		customerRepository.findAll(pageable)
 		.forEach(customers::add);
 		return customers;
+	}
+	
+	public Long getNoOfRecords() {
+		return customerRepository.count();
 	}
 	
 	public boolean addCustomer(TCustomer customer) throws Exception{

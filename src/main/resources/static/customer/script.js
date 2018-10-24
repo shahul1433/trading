@@ -90,8 +90,8 @@ function addCustomerToDB($scope, $rootScope, $http){
 	$scope.clear();
 }
 
-function getUsers($scope, $http){
-	$http.get("http://localhost:8080/get-all-customer")
+function getUsers($scope, $http, page, rows){
+	$http.get(server_url+"/get-all-customer/"+page+"/"+rows)
     .then(function(response) {
         $scope.customers = response.data;
     });

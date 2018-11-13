@@ -1,53 +1,82 @@
 <link rel="stylesheet" href="customer/style.css">
 
 <div ng-controller="customerCtrl">
-	<h1 id="customer-header">
-		Customer
-		<span>
-			<button type="button" class="btn btn-default pull-right btn-sm" style="margin-left: 15px;" ng-click="refresh()">
-				<i class="glyphicon glyphicon-refresh"></i>
-			</button>
-			<button type="button" class="btn btn-primary pull-right btn-sm" ng-click="addCustomer()">
-				<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
-			</button>
-		</span>
-	</h1>
 	<!-- To show flash messages -->
 	<flash-message duration="100" style="width: 10%;"></flash-message>
 	
 	<div class="panel panel-default">
-		<div class="panel-heading" style="font-weight: bolder;">
-			<div class="row">
-				<div class="col-xs-1">#</div>
-				<div class="col-xs-2">SHOP NAME</div>
-				<div class="col-xs-1">CUSTOMER</div>
-				<div class="col-xs-2">PLACE</div>
-				<div class="col-xs-1">POST</div>
-				<div class="col-xs-1">DISTRICT</div>
-				<div class="col-xs-1">STATE</div>
-				<div class="col-xs-2">GSTIN</div>
+	
+		<!-- Panel Heading -->
+		<div class="panel-heading">
+			<div id="customer-header" class="row">
+				<h1 class="col-sm-8">Customer</h1>
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-default pull-right btn-sm" style="margin-left: 15px;" ng-click="refresh()">
+						<i class="glyphicon glyphicon-refresh"></i>
+					</button>
+					<button type="button" class="btn btn-primary pull-right btn-sm" ng-click="addCustomer()">
+						<i class="glyphicon glyphicon-plus"></i> <i class="glyphicon glyphicon-user"></i>
+					</button>
+					<button type="button" class="btn btn-primary pull-right btn-sm" style="margin-right: 15px;" ng-click="" ng-disabled="!selectStatus">
+						Delete
+					</button>
+				</div>
 			</div>
 		</div>
 		
-		<table class='table table-hover table-fixed'>
-			<tbody ng-style="testStyle">
-				<tr ng-repeat="x in customers">
-					<td class="col-xs-1">{{($index + 1) + (($parent.selected-1)*selectedPageNo)}}</td>
-					<td class="col-xs-2">{{x.shopName}}</td>
-					<td class="col-xs-1">{{x.customerName}}</td>
-					<td class="col-xs-2">{{x.place}}</td>
-					<td class="col-xs-1">{{x.post}}</td>
-					<td class="col-xs-1">{{x.district}}</td>
-					<td class="col-xs-1">{{x.state}}</td>
-					<td class="col-xs-2">{{x.gstin}}</td>
-					<td>
-						<button class="btn btn-success btn-sm" style="margin-right: 2px;">Edit</button>
-						<button class="btn btn-danger btn-sm" ng-click="askToDelete(this)">Delete</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<!-- Panel Body -->
+		<div class="panel panel-body">
+			<div>
+				<table class="table">
+					<thead>
+						<tr>
+							<!-- <th style="width: 10px;"><input type="checkbox" ng-model="selectAllUser" ng-change="selectStatus=selectAllUser"/></th> -->
+							<th style="width: 10px;"><input type="checkbox" ng-model="selectAllUser" ng-click="selectOrDeselectUsers(this)"/></th>
+							<th style="width: 50px;">#</th>
+							<th style="width: 250px;">SHOP NAME</th>
+							<th style="width: 200px;">CUSTOMER</th>
+							<th style="width: 200px;">PLACE</th>
+							<th style="width: 150px;">POST</th>
+							<th style="width: 200px;">DISTRICT</th>
+							<th style="width: 200px;">STATE</th>
+							<th>GSTIN</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="table-fixed" ng-style="testStyle">
+				<table class='table table-hover'>
+					<tbody >
+						<tr ng-repeat="x in customers">
+							<!-- <td class="col-xs-1">{{($index + 1) + (($parent.selected-1)*selectedPageNo)}}</td>
+							<td class="col-xs-2">{{x.shopName}}</td>
+							<td class="col-xs-1">{{x.customerName}}</td>
+							<td class="col-xs-2">{{x.place}}</td>
+							<td class="col-xs-1">{{x.post}}</td>
+							<td class="col-xs-1">{{x.district}}</td>
+							<td class="col-xs-1">{{x.state}}</td>
+							<td class="col-xs-2">{{x.gstin}}</td>
+							<td>
+								<button class="btn btn-success btn-sm" style="margin-right: 2px;">Edit</button>
+								<button class="btn btn-danger btn-sm" ng-click="askToDelete(this)">Delete</button>
+							</td> -->
+							<!-- <td style="width: 10px;"><input type="checkbox" class="check-user" ng-checked="selectAllUser" ng-model="h" ng-change="check()"/></td> -->
+							<td style="width: 10px;"><input type="checkbox" id="{{x.id}}" class="check-user" ng-checked="userCheck" ng-model="h" ng-click="check(this)"/></td>
+							<td style="width: 50px;">{{($index + 1) + (($parent.selected-1)*selectedPageNo)}}</td>
+							<td style="width: 250px;">{{x.shopName}}</td>
+							<td style="width: 200px;">{{x.customerName}}</td>
+							<td style="width: 200px;">{{x.place}}</td>
+							<td style="width: 150px;">{{x.post}}</td>
+							<td style="width: 200px;">{{x.district}}</td>
+							<td style="width: 200px;">{{x.state}}</td>
+							<td>{{x.gstin}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 		
+		<!-- Panel Footer -->
 		<div class="panel-footer">
 			<ul class="pagination pagination-sm pagination-customer">
 				<li ng-repeat="y in pages" ng-class="{active: $parent.selected == y}" ng-click="$parent.selected=y; paginatedResult(this);">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	  <title>P K Rubber Trading</title>
+	  <title>Trading Software</title>
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="common/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,10 +20,12 @@
 	<body ng-app="homeApp">
 		
 		<!-- Header -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="clockCtrl">
+		<!-- <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="clockCtrl"> -->
+		<nav class="navbar navbar-inverse" ng-controller="clockCtrl">
+ 
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">P K Rubber Trading</a>
+					<a class="navbar-brand" href="#">Trading Software <sub>v1.0</sub></a>
 				</div>
 				<ul id="main-nav" class="nav navbar-nav">
 					<li><a href="#!home">Home</a></li>
@@ -54,7 +56,8 @@
 		<script type="text/javascript" src="common/script.js"></script>
 		<script type="text/javascript" src="common/angular.js"></script>
 		
-		<div ng-view class="container-fluid" style="margin-top: 50px;"></div>
+		<!-- <div ng-view class="container-fluid" style="margin-top: 50px;"></div> -->
+		<div ng-view class="container-fluid"></div>
 		
 		<!-- Footer -->
 		<div id="footer" class="footer navbar-fixed-bottom text-center">

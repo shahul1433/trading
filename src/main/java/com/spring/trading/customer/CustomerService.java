@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,9 @@ public class CustomerService {
 	
 	public List<TCustomer> getAllCustomer(Integer page, Integer rows){
 		List<TCustomer> customers = new ArrayList<>();
-		Pageable pageable = new PageRequest(page, rows);
+		Sort sort;
+		//Pageable pageable = new PageRequest(page, rows);
+		Pageable pageable = new PageRequest(page, rows, new Sort(Sort.Direction.ASC, "id"));
 		customerRepository.findAll(pageable)
 		.forEach(customers::add);
 		return customers;

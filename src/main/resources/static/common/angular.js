@@ -71,7 +71,7 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	var appWindow = angular.element($window);
 	appWindow.bind('resize', function(){
 		$scope.testStyle = {
-			"height" : ($window.innerHeight - 280)
+			"height" : ($window.innerHeight - 380)
 		}
 	});
 	
@@ -82,15 +82,14 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	getTotalPageNo($scope,$http);
 	getUsers($scope, $http, 0 , 20);
 	$scope.testStyle = {
-			"height" : ($window.innerHeight - 280)
+			"height" : ($window.innerHeight - 380)
 	}
 	
 	$scope.refresh = function() {
-		getUsers($scope, $http, 0, 20);
-	};
-	
-	$scope.deleteCustomer = function(data){
-		deleteCustomer(data, $http, $rootScope)
+		getTotalPageNo($scope,$http);
+		var noOfRows = this.selectedPageNo;
+		var pageNo = this.selected;
+		getUsers($scope, $http, (pageNo-1), noOfRows);
 	};
 	
 	$scope.askToDelete = function(data){
@@ -131,13 +130,26 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 		getUsers($scope, $http, (pageNo-1), noOfRows);
 	};
 	
+	//==== Delete Button listener start====
+	$scope.selectStatus = false;
+	$scope.selectAllUser = false;
+	$rootScope.selectedList = [];
+	
+	$scope.check = function(data){
+		checker(data,$scope,$rootScope);
+	}
+	//==== Delete Button listener end====
+	
+	$scope.selectOrDeselectUsers = function(data){
+		selectOrDeselectUsersFn(data, $scope, $rootScope);
+	}
 });
 
 function getTotalPageNo($scope,$http){
 	$http.get(server_url+"/get-no-of-customer")
 	.then(function(response) {
-		var totalPageno = Math.floor(response.data/$scope.selectedPageNo);
-		var fraction = response.data%20;
+		var totalPageno = Math.floor(response.data / $scope.selectedPageNo);
+		var fraction = response.data % $scope.selectedPageNo;
 		if(fraction != 0)
 			totalPageno += 1;
 		var arr = [];

@@ -184,3 +184,64 @@ var addCustomerPopupCtrl = function($scope, $modalInstance, $rootScope){
 		$modalInstance.dismiss('cancel');
 	});
 }
+
+function checker(data,$scope,$rootScope){
+	if(data.h == true){
+		var index = $rootScope.selectedList.indexOf(data.x.id);
+		if(index == -1){
+			$rootScope.selectedList.push(data.x.id);
+		}
+	}else{
+		var index = $rootScope.selectedList.indexOf(data.x.id);
+		if(index > -1){
+			$rootScope.selectedList.splice(index,1);
+		}
+	}
+	//Set select All check box here
+	var totalCustomers = $scope.customers.length;
+	var selectedCustomers = $rootScope.selectedList.length;
+	
+	if(selectedCustomers == totalCustomers)
+		$scope.selectAllUser = true;
+	else
+		$scope.selectAllUser = false;
+	
+	if(selectedCustomers > 0)
+		$scope.selectStatus = true;
+	else
+		$scope.selectStatus = false;
+}
+
+function selectOrDeselectUsersFn(data, $scope, $rootScope){
+	$scope.selectStatus = $scope.selectAllUser;
+	
+	angular.forEach($('.check-user'), function(user){
+		if(data.selectAllUser == true)
+			user.checked=true;
+		else
+			user.checked=false;
+	});
+	
+	if(data.selectAllUser == true){
+		angular.forEach($scope.customers, function(customer){
+			var index = $rootScope.selectedList.indexOf(customer.id);
+			if(index == -1){
+				$rootScope.selectedList.push(customer.id);
+			}
+		});
+	}else{
+		angular.forEach($scope.customers, function(customer){
+			var index = $rootScope.selectedList.indexOf(customer.id);
+			if(index > -1){
+				$rootScope.selectedList.splice(index,1);
+			}
+		});
+	}
+	//Set select All check box here
+	var totalCustomers = $scope.customers.length;
+	var selectedCustomers = $rootScope.selectedList.length;
+	if(selectedCustomers == totalCustomers)
+		$scope.selectAllUser = true;
+	else
+		$scope.selectAllUser = false;
+}

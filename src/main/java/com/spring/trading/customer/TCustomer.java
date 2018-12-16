@@ -13,7 +13,6 @@ public class TCustomer{
 	@GeneratedValue
 	private Integer id;
 	
-	
 	private String shopName;
 	private String customerName;
 	private String mobile;

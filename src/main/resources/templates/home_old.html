@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Trading Software</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="common/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="common/toastr.min.css">
+	  <script src="common/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="common/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="common/angularjs/1.6.9/angular.min.js"></script>
+	  <script src="common/angularjs/1.6.9/angular-route.js"></script>
+	  <script src="common/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	  <script src="common/toastr.min.js"></script>
+	  <script src="common/flash/dist/angular-flash.min.js"></script>
+	  <link rel="stylesheet" href="common/style.css">
+	  
+	</head>
+	
+	<body ng-app="homeApp">
+		
+		<!-- Header -->
+		<!-- <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="clockCtrl"> -->
+		<nav class="navbar navbar-inverse" ng-controller="clockCtrl">
+ 
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Trading Software <sub>v1.0</sub></a>
+				</div>
+				<ul id="main-nav" class="nav navbar-nav">
+					<li><a href="#!home">Home</a></li>
+					<li><a href="#!customer">Customer</a></li>
+					<li><a href="#">Stock</a></li>
+					<li><a href="#">Ledger</a></li>
+					<li><a href="#">Credits</a></li>
+					<li><a href="#!">Account</a></li>
+					<li><a href="#!about">About</a></li>
+					<li>
+						<a href="">
+							<i>
+								<span style="color: lightblue;">{{clock | date:'dd MMM yyyy,'}}</span>
+								<span style="color: lightblue;">{{day}}</span>
+								<span class="glyphicon glyphicon-time" style="color: white;"></span>
+								<span style="color: white;">{{clock | date:'hh:mm:ss a'}}</span>
+							</i>
+						</a>
+					</li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		
+		<script type="text/javascript" src="common/script.js"></script>
+		<script type="text/javascript" src="common/angular.js"></script>
+		
+		<!-- <div ng-view class="container-fluid" style="margin-top: 50px;"></div> -->
+		<div ng-view class="container-fluid"></div>
+		
+		<!-- Footer -->
+		<div id="footer" class="footer navbar-fixed-bottom text-center">
+			&copy 2018, all rights are reserved
+		</div>
+		
+	</body>
+</html>

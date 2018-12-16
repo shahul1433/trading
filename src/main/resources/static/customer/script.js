@@ -54,22 +54,22 @@ function clearAddCustomerForm($scope){
 }
 
 function addCustomerToDB($scope, $rootScope, $http){
-	var json = new Object();
-	json["shopName"] = $scope.shopName;
-	json["customerName"] = $scope.customerName;
-	json["mobile"] = $scope.mobile;
-	json["email"] = $scope.email;
-	json["place"] = $scope.place;
-	json["post"] = $scope.post;
-	json["district"] = $scope.district.toUpperCase();
-	json["state"] = $scope.state.toUpperCase();
-	json["gstin"] = $scope.gstin.toUpperCase();
-	json["archive"] = false;
+	var customerJson = new Object();
+	customerJson["shopName"] = $scope.shopName;
+	customerJson["customerName"] = $scope.customerName;
+	customerJson["mobile"] = $scope.mobile;
+	customerJson["email"] = $scope.email;
+	customerJson["place"] = $scope.place;
+	customerJson["post"] = $scope.post;
+	customerJson["district"] = $scope.district.toUpperCase();
+	customerJson["state"] = $scope.state.toUpperCase();
+	customerJson["gstin"] = $scope.gstin.toUpperCase();
+	customerJson["archive"] = false;
 	$http({
-		url : server_url+'/add-customer',
+		url : server_url+'/customer/add-customer',
 		method : "POST",
-		data : json,
-		headers : {'Content-Type': 'application/json'}
+		data : customerJson,
+		headers : {'Content-Type' : 'application/json'}
 	}).then(function(response){
 		//Success
 		if(response.data.status == true){
@@ -85,13 +85,13 @@ function addCustomerToDB($scope, $rootScope, $http){
 		//failed
 		toastr.options.preventDuplicates = true;
 		toastr.error("Something went wrong", 'Error');
-		console.log("Something went wrong");
+		console.log(response);
 	});
 	$scope.clear();
 }
 
 function getUsers($scope, $http, page, rows){
-	$http.get(server_url+"/get-all-customer/"+page+"/"+rows)
+	$http.get(server_url+"/customer/get-all-customer/"+page+"/"+rows)
     .then(function(response) {
         $scope.customers = response.data;
     });
@@ -99,8 +99,11 @@ function getUsers($scope, $http, page, rows){
 
 function deleteCustomer(data, $http, $rootScope){
 	$http({
-		url : server_url+'/delete-customer/'+data.x.id, //http://localhost:8080/delete-customer
-		method : "DELETE"
+		/*url : server_url+'/customer/delete-customer/'+data.x.id, //http://localhost:8080/customer/delete-customer  */
+		url : server_url+'/customer/delete-customer/', //http://localhost:8080/customer/delete-customer
+		method : "DELETE",
+		data : $rootScope.selectedList,
+		headers : {'Content-Type': 'application/json'}
 	}).then(function(response){
 		//Success
 		toastr.success('Customer deleted <strong>Successfully</strong>');
@@ -109,7 +112,7 @@ function deleteCustomer(data, $http, $rootScope){
 	function(response){
 		//failed
 		toastr.error('Something went wrong while deleting customer.', 'Error');
-		console.log("Something went wrong while deleting customer.");
+		console.log(response);
 	});
 }
 
@@ -121,17 +124,17 @@ function askToDelete(data, $modal, $http, $rootScope){
 						+'<h4 class="modal-title" style="font-weight: bold;"><span class="glyphicon glyphicon-check"></span> Delete Confirmation</h4>'
 					+'</div>'
 					+'<div class="modal-body text-center">'
-						+'<table class="cust-delete-table">'
+						/*+'<table class="cust-delete-table">'
 							+'<tr>'
 								+'<td align="left" style="color:black;">Shop Name</td>'
-								+'<td>'+data.x.shopName+'</td>'
+								//+'<td>'+data.x.shopName+'</td>'
 							+'</tr>'
 							+'<tr>'
 								+'<td align="left" style="color:black;">Customer Name</td>'
-								+'<td>'+data.x.customerName+'</td>'
+								//+'<td>'+data.x.customerName+'</td>'
 							+'</tr>'
-						+'</table>'
-						+'<hr><b>' + message + '<b>'
+						+'</table>'*/
+						+'<b>' + message + '<b>'
 					+'</div>'
      				+'<div class="modal-footer">'
      					+'<button class="btn btn-primary" ng-click="ok()">OK</button>'
@@ -149,6 +152,7 @@ function askToDelete(data, $modal, $http, $rootScope){
     });
 }
 
+
 var ModalInstanceCtrl = function($scope, $modalInstance){
 	$scope.ok = function(){
 		$modalInstance.close();
@@ -157,6 +161,32 @@ var ModalInstanceCtrl = function($scope, $modalInstance){
 	$scope.cancel = function(){
 		$modalInstance.dismiss('cancel');
 	}
+}
+
+function viewCustomers(data, $scope, $modal, $rootScope){
+	$rootScope.viewCustomer = data;
+	var modalInstance = $modal.open({
+		templateUrl : "customer/template/view_customer_popup.html",
+		controller : viewCustomerPopupCtrl
+	});
+}
+
+var viewCustomerPopupCtrl = function($scope, $rootScope, $modalInstance){
+	
+	$scope.shopName = $rootScope.viewCustomer.x.shopName;
+	$scope.customerName = $rootScope.viewCustomer.x.customerName;
+	$scope.mobile = $rootScope.viewCustomer.x.mobile;
+	$scope.email = $rootScope.viewCustomer.x.email;
+	$scope.place = $rootScope.viewCustomer.x.place;
+	$scope.post = $rootScope.viewCustomer.x.post;
+	$scope.district = $rootScope.viewCustomer.x.district;
+	$scope.state = $rootScope.viewCustomer.x.state;
+	$scope.gstin = $rootScope.viewCustomer.x.gstin;
+	
+	$rootScope.$on("closeViewCustomerPopup", function(){
+		$modalInstance.dismiss('cancel');
+	});
+	
 }
 
 function addCustomer($scope, $rootScope, $http, $modal){

@@ -1,5 +1,6 @@
 package com.spring.trading.customer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("customer")
 public class CustomerRestController {
 
 	@Autowired
@@ -54,13 +56,40 @@ public class CustomerRestController {
 		return response;
 	}
 	
-	@RequestMapping(value="/delete-customer/{id}", method=RequestMethod.DELETE)
-	public void deleteCustomer(@PathVariable String id) {
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/update-customer", method=RequestMethod.PUT)
+	public JSONObject updateCustomer(@RequestBody TCustomer customer) {
+		JSONObject response = new JSONObject();
 		try {
-			Integer idInt = Integer.parseInt(id);
-			service.deleteCustomer(idInt);
-		}catch (Exception e) {
+			service.addCustomer(customer);
+			response.put("status", true);
+			response.put("response", "Customer updates successfully");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			response.put("status", false);
+			response.put("response", e.getMessage()+" , "+e.getCause());
 		}
+		return response;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/delete-customer" , method=RequestMethod.DELETE)
+	public JSONObject deleteCustomers(@RequestBody ArrayList<Integer> ids) {
+		
+		JSONObject json = new JSONObject();
+		json.put("status", true);
+		json.put("response", "customers deleted successfully");
+		ids.forEach((id) -> {
+			try {
+				service.deleteCustomer(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+				json.put("status", false);
+				json.put("response", e.getMessage()+ " , " +e.getCause());
+			}
+		});
+		return json;
 	}
 }

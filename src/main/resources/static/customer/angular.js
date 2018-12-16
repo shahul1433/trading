@@ -44,28 +44,6 @@ homeApp.directive("nextFocus", function(){
     return directive;
 });
 
-homeApp.controller('clockCtrl', function($scope, $interval){
-	var day = function(){
-		var d = new Date();
-		var weekday=new Array(7);
-		weekday[0]="Sunday";
-		weekday[1]="Monday";
-		weekday[2]="Tuesday";
-		weekday[3]="Wednesday";
-		weekday[4]="Thursday";
-		weekday[5]="Friday";
-		weekday[6]="Saturday";
-		$scope.day = weekday[d.getDay()];
-	}
-	var tick = function(){
-		$scope.clock = Date.now();
-		day();
-	}
-	tick();
-	$interval(tick, 1000);
-	
-});
-
 homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, Flash, $window){
 	//Window resize event
 	var appWindow = angular.element($window);
@@ -93,7 +71,10 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	};
 	
 	$scope.askToDelete = function(data){
-		askToDelete(data, $modal, $http, $rootScope);
+		if($rootScope.selectedList.length > 0)
+			askToDelete(data, $modal, $http, $rootScope);
+		else
+			toastr.error("No records selected.", 'Error');
 	}
 	
 	$scope.clear = function(){
@@ -143,10 +124,14 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	$scope.selectOrDeselectUsers = function(data){
 		selectOrDeselectUsersFn(data, $scope, $rootScope);
 	}
+	
+	$scope.viewCustomer = function(data){
+		viewCustomers(data, $scope, $modal, $rootScope);
+	}
 });
 
 function getTotalPageNo($scope,$http){
-	$http.get(server_url+"/get-no-of-customer")
+	$http.get(server_url+"/customer/get-no-of-customer")
 	.then(function(response) {
 		var totalPageno = Math.floor(response.data / $scope.selectedPageNo);
 		var fraction = response.data % $scope.selectedPageNo;
@@ -174,4 +159,49 @@ homeApp.controller('addCustomerCtrl', function($scope, $http, $rootScope){
 			$rootScope.$emit("closeAddCustomerPopup", {});
 		}
 	});
+});
+
+homeApp.controller('viewCustomerCtrl', function($scope, $rootScope, $http){
+	$scope.flag = false;
+	$scope.closeViewCustomerPopup = function(){
+		$rootScope.$emit("closeViewCustomerPopup", {});
+	};
+	
+	$scope.updateCustomer = function(){
+		var customerJson = new Object();
+		customerJson["id"] = $rootScope.viewCustomer.x.id;
+		customerJson["shopName"] = $scope.shopName;
+		customerJson["customerName"] = $scope.customerName;
+		customerJson["mobile"] = $scope.mobile;
+		customerJson["email"] = $scope.email;
+		customerJson["place"] = $scope.place;
+		customerJson["post"] = $scope.post;
+		customerJson["district"] = $scope.district.toUpperCase();
+		customerJson["state"] = $scope.state.toUpperCase();
+		customerJson["gstin"] = $scope.gstin.toUpperCase();
+		customerJson["archive"] = false;
+		
+		$http({
+			url : server_url + '/customer/update-customer',
+			method : 'PUT',
+			data : customerJson,
+			headers : {'Content-Type' : 'application/json'}
+		}).then(function(resp){
+			//Success
+			if(resp.data.status == true){
+				toastr.success('Customer updated <strong>Successfully</strong>');
+				$rootScope.$emit("refreshCustomer", {});
+				$rootScope.$emit("closeViewCustomerPopup", {});
+			}else{
+				toastr.options.preventDuplicates = true;
+				toastr.error(resp.data.response, 'Error');
+				console.log(resp.data.response);
+			}
+		},function(resp){
+			//Failed
+			toastr.options.preventDuplicates = true;
+			toastr.error("Something went wrong", 'Error');
+			console.log(resp);
+		});
+	};
 });

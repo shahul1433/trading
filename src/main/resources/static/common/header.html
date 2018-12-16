@@ -1,17 +1,88 @@
 <!-- Header -->
+<script>
+	var today = new Date();
+	//Making date
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1; // January is 0
+	var yyyy = today.getFullYear();
+	
+	//Digits formating
+	if(dd < 10){
+		dd = '0' + dd;
+	}
+	if(mm < 10){
+		mm = '0' + mm;
+	}
+	var date = dd + '-'+ mm + '-' + yyyy;
+	$('#date').text(date);
+	
+	//Getting day
+	var weekday = new Array(7);
+	weekday[0]="Sunday";
+	weekday[1]="Monday";
+	weekday[2]="Tuesday";
+	weekday[3]="Wednesday";
+	weekday[4]="Thursday";
+	weekday[5]="Friday";
+	weekday[6]="Saturday";
+	$('#day').text(weekday[today.getDay()]);
+	
+	//Getting time
+	startTime();
+	function startTime() {
+	  var today = new Date();
+	  var h = today.getHours();
+	  var m = today.getMinutes();
+	  var s = today.getSeconds();
+	  h = checkTime(h);
+	  m = checkTime(m);
+	  s = checkTime(s);
+	  
+	  var amPm;
+	  if(today.getHours() >= 12)
+		  amPm = 'PM';
+	  else
+		  amPm = 'AM';
+	  
+	  if(today.getHours() == 0){
+		h = 12;
+	  }
+	  if(today.getHours() > 12){
+		  h = h - 12;
+	  }
+	  
+	  $('#time').text(h + ":" + m + ":" + s + " "+amPm);
+	  var t = setTimeout(startTime, 1000);
+	}
+	function checkTime(i) {
+	  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+	  return i;
+	}
+</script>
 <nav class="navbar navbar-inverse">
+
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">P K Rubber Trading</a>
+			<a class="navbar-brand" href="#">Trading Software <sub>v1.0</sub></a>
 		</div>
 		<ul id="main-nav" class="nav navbar-nav">
-			<li><a id="home" href="#">Home</a></li>
-			<li><a id="customer" href="#">Customer</a></li>
-			<li><a href="#">Stock</a></li>
-			<li><a href="#">Ledger</a></li>
-			<li><a href="#">Credits</a></li>
-			<li><a href="#">Account</a></li>
-			<li><a id="about" href="#">About</a></li>
+			<li><a href="/">Home</a></li>
+			<li><a href="/customer">Customer</a></li>
+			<li><a href="/stock">Stock</a></li>
+			<li><a href="/ledger">Ledger</a></li>
+			<li><a href="/credit">Credits</a></li>
+			<li><a href="/account">Account</a></li>
+			<li><a href="/about">About</a></li>
+			<li>
+				<a href="#">
+					<i>
+						<span style="color: lightblue;" id="date"></span>
+						<span style="color: lightblue;" id ="day"></span>
+						<span class="glyphicon glyphicon-time" style="color: white;"></span>
+						<span style="color: white;" id="time"></span>
+					</i>
+				</a>
+			</li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">

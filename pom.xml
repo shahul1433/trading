@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>trading</name>
-	<description>PK Trading project</description>
+	<description>Trading project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -13,6 +13,7 @@
 		<script src="common/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 		<script src="common/flash/dist/angular-flash.min.js"></script>
 		<script src="common/toastr.min.js"></script>
+		<link rel="stylesheet" href="ledger/style.css">
 	</head>
 	<script type="text/javascript">
 		$(function(){
@@ -26,6 +27,85 @@
 			<div class="jumbotron">
 			<h1>Ledger</h1>
 			</div>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name
+						<form action="#" id="search-form" class="form-inline" role="from" >
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="Name...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+						</th>
+						<th>Customer
+						<form action="#" id="search-form" class="form-inline" role="from" >
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="Customer...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+						</th>
+						<th>Place
+						<form action="#" id="search-form" class="form-inline" role="from" >
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="Place...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+						</th>
+						<th>Post
+						<form action="#" id="search-form" class="form-inline" role="from" >
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="Post...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+						</th>
+						<th>District
+						<form action="#" id="search-form" class="form-inline" role="from" >
+							<div class="input-group">
+								<input type="text" class="form-control search-form" placeholder="District...">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</form>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Green Leaf</td>
+						<td>Shahul</td>
+						<td>Kottappuram</td>
+						<td>679513</td>
+						<td>Palakkad</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		</div>
 		<div id="footer"></div>
 	</body>

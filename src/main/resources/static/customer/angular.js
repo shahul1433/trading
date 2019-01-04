@@ -49,7 +49,7 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	var appWindow = angular.element($window);
 	appWindow.bind('resize', function(){
 		$scope.testStyle = {
-			"height" : ($window.innerHeight - 380)
+			"height" : ($window.innerHeight - 180)
 		}
 	});
 	
@@ -60,7 +60,7 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	getTotalPageNo($scope,$http);
 	getUsers($scope, $http, 0 , 20);
 	$scope.testStyle = {
-			"height" : ($window.innerHeight - 380)
+			"height" : ($window.innerHeight - 180)
 	}
 	
 	$scope.refresh = function() {

@@ -137,8 +137,8 @@ function askToDelete(data, $modal, $http, $rootScope){
 						+'<b>' + message + '<b>'
 					+'</div>'
      				+'<div class="modal-footer">'
-     					+'<button class="btn btn-primary" ng-click="ok()">OK</button>'
-     					+'<button class="btn btn-warning" ng-click="cancel()">Cancel</button>'
+     					+'<button class="btn btn-primary" ng-click="ok()">Yes</button>'
+     					+'<button class="btn btn-warning" ng-click="cancel()">No</button>'
      				+'</div>';
     
     var modalInstance = $modal.open({

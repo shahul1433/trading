@@ -94,6 +94,8 @@ function getUsers($scope, $http, page, rows){
 	$http.get(server_url+"/customer/get-all-customer/"+page+"/"+rows)
     .then(function(response) {
         $scope.customers = response.data;
+        $scope.startItem = ( page * rows ) + 1; 
+        $scope.endItem = ( page * rows ) + response.data.length;
     });
 }
 

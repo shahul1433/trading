@@ -4,7 +4,7 @@ var server_url = window.location.origin;
 //========== Global variable declaration & initialization End ==============
 
 //========== Navigation to different pages start ======================
-homeApp.config(function($routeProvider){
+/*homeApp.config(function($routeProvider){
 	$routeProvider
 	.when("/", {
 		templateUrl : "home/index.html"
@@ -18,7 +18,7 @@ homeApp.config(function($routeProvider){
 	.when("/about", {
 		templateUrl : "about/index.html"
 	});
-});
+});*/
 //========== Navigation to different pages start ======================
 
 homeApp.directive("nextFocus", function(){
@@ -95,6 +95,7 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	$scope.noOfPages = [5,20,40,60,80,100];
 	$scope.selectedPageNo = 20;
 	$scope.selected = 1;
+	$scope.totalItem = 0;
 	
 	//$scope.pages = [1,2,3,4,5];
 	$scope.paginatedResult = function(data){
@@ -128,20 +129,98 @@ homeApp.controller('customerCtrl', function($scope, $http, $rootScope, $modal, F
 	$scope.viewCustomer = function(data){
 		viewCustomers(data, $scope, $modal, $rootScope);
 	}
+	
+	$scope.showNextPages = function(){
+		if(!$(".next-btn").hasClass("disabled")){
+			//console.log($scope.totNoOfPages);
+			var start = $scope.pages[0] + 1;
+			var end = $scope.pages[$scope.pages.length - 1];
+			
+			if(end < $scope.totNoOfPages){
+				var data = start + 4;
+				var showArr = [];
+				if(data <= $scope.totNoOfPages){
+					var i=0;
+					for(start; start <= data; start++){
+						showArr[i] = start;
+						i++;
+					}
+					$scope.pages = showArr;
+					$scope.selected = showArr[0];
+				}else{
+					var i=0;
+					for(start; start <= $scope.totNoOfPages; start++){
+						showArr[i] = start;
+						i++;
+					}
+					$scope.pages = showArr;
+				}
+				$(".prev-btn").removeClass("disabled");
+			}else{
+				$(".next-btn").addClass("disabled");
+				$(".prev-btn").removeClass("disabled");
+			}
+		}
+	}
+	
+	$scope.showPrevPages = function(){
+		if(!$(".prev-btn").hasClass("disabled")){
+			//console.log($scope.totNoOfPages);
+			var end = $scope.pages[$scope.pages.length - 1] - 1;
+			var start = end - 4;
+			
+			if(start > 0){
+				var i=0;
+				var showArr = [];
+				for(start; start <= end; start++){
+					showArr[i] = start;
+					i++;
+				}
+				$scope.pages = showArr;
+				$scope.selected = showArr[showArr.length - 1];
+				$(".next-btn").removeClass("disabled");
+			}else{
+				var i=0;
+				var showArr = [];
+				for(start=1; start <= end; start++){
+					showArr[i] = start;
+					i++;
+				}
+				$scope.pages = showArr;
+				$scope.selected = showArr[showArr.length - 1];
+				$(".next-btn").removeClass("disabled");
+				$(".prev-btn").addClass("disabled");
+			}
+		}
+	}
 });
 
 function getTotalPageNo($scope,$http){
 	$http.get(server_url+"/customer/get-no-of-customer")
 	.then(function(response) {
+		$scope.totalItem = response.data; //for showing purpose
 		var totalPageno = Math.floor(response.data / $scope.selectedPageNo);
 		var fraction = response.data % $scope.selectedPageNo;
 		if(fraction != 0)
 			totalPageno += 1;
 		var arr = [];
-		for(var i=1; i<=totalPageno; i++){
-			arr[i-1] = i;
+		$scope.totNoOfPages = totalPageno;
+		//$scope.totNoOfPages = 7; // for development purpose can remove later.
+		$(".prev-btn").addClass("disabled");
+		var showArr = [];
+		if(totalPageno > 4){
+			for(var i=0; i<4; i++){
+				showArr[i] = i+1;
+			}
+			$(".next-btn").removeClass("disabled");
+		}else{
+			for(var i=0; i<totalPageno; i++){
+				showArr[i] = i+1;
+			}
+			$(".next-btn").addClass("disabled");
 		}
-		$scope.pages = arr;
+		$scope.pages = showArr;
+		//console.log(totalPageno);
 	});
 }
 

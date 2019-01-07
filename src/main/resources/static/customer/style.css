@@ -23,6 +23,11 @@
 	color: white;
 }
 
+.modal-header{
+	background-color: #c9c9cc;
+	color: black;
+}
+
 .cust-delete-table{
 	padding: 10px;
 	width: 60%;
@@ -75,4 +80,7 @@
     padding-right: 15px;
     padding-top: 10px;
     padding-bottom: 5px;
+}
+.tb-head{
+	text-align: center;
 }

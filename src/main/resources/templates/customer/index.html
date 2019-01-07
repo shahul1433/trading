@@ -48,13 +48,24 @@
 				<flash-message duration="100" style="width: 10%;"></flash-message>
 				
 				<div class="table-fixed" ng-style="testStyle">
-					<table class='table table-hover'>
+					<table class='table table-bordered'>
 						<thead>
 							<tr>
-								<!-- <th style="width: 10px;"><input type="checkbox" ng-model="selectAllUser" ng-change="selectStatus=selectAllUser"/></th> -->
 								<th style="width: 10px;"><input type="checkbox" ng-model="selectAllUser" ng-click="selectOrDeselectUsers(this)"/></th>
-								<th style="width: 50px;">#</th>
-								<th>SHOP NAME
+								<th class="tb-head" style="width: 50px;">#</th>
+								<th class="tb-head">SHOP NAME</th>
+								<th class="tb-head">CUSTOMER</th>
+								<th class="tb-head">PLACE</th>
+								<th class="tb-head">POST</th>
+								<th class="tb-head">DISTRICT</th>
+								<th class="tb-head">STATE</th>
+								<th class="tb-head">GSTIN</th>
+							</tr>
+							
+							<tr>
+								<th></th>
+								<th></th>
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -66,7 +77,7 @@
 										</div>
 									</form>
 								</th>
-								<th>CUSTOMER
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -78,7 +89,7 @@
 										</div>
 									</form>
 								</th>
-								<th>PLACE
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -90,7 +101,7 @@
 										</div>
 									</form>
 								</th>
-								<th>POST
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -102,7 +113,7 @@
 										</div>
 									</form>
 								</th>
-								<th>DISTRICT
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -114,7 +125,7 @@
 										</div>
 									</form>
 								</th>
-								<th>STATE
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -126,7 +137,7 @@
 										</div>
 									</form>
 								</th>
-								<th>GSTIN
+								<th>
 									<form action="#" id="search-form" class="form-inline" role="from" >
 										<div class="input-group">
 											<input type="text" class="form-control search-form" placeholder="Search...">
@@ -174,11 +185,14 @@
 		
 		<div id="dash-footer">
 			<ul class="pagination pagination-sm pagination-customer">
+				<li class="prev-btn" ng-click="showPrevPages()" ng-disabled="true"><span>&laquo;</li>
 				<li ng-repeat="y in pages" ng-class="{active: $parent.selected == y}" ng-click="$parent.selected=y; paginatedResult(this);">
 					<a href="" >{{y}}</a>
 				</li>
+				<li class="next-btn" ng-click="showNextPages()"><span>&raquo;</li>
 			</ul>
 			<select class="pull-right" id="pageNoSelect" ng-model="selectedPageNo" ng-options="pageNo for pageNo in noOfPages" ng-change="refreshPage(this);"></select>
+			<span class="pull-right" ng-model="totalItem">Showing {{startItem}} - {{endItem}} of {{totalItem }} items</span>
 		</div>
 		
 		<div id="footer"></div>

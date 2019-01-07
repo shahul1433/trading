@@ -2,7 +2,7 @@
 <!-- Modal start here -->
 		
 <!-- Modal content -->
-<div class="modal-content" ng-controller="addCustomerCtrl" >
+<div ng-controller="addCustomerCtrl" >
 
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" ng-click="closeAddCustomerPopup()">&times;</button>
@@ -12,7 +12,7 @@
 	<div class="modal-body form-container">
 		<form class="form-horizontal" action="#" name="addCustomerForm" novalidate>
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="shopName">Shop Name</label>
+				<label class="control-label col-sm-3 pull-left" for="shopName">Shop Name</label>
 				<div class="col-sm-9">
 					<input type="text" next-focus tabindex="0" id="shopName" ng-model="shopName" name="shopName" class="form-control" placeholder="Enter Shop Name" required="required">
 					<span class="form-error" ng-show="addCustomerForm.shopName.$dirty && addCustomerForm.shopName.$invalid">
